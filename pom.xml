@@ -12,6 +12,7 @@
         <module>discover-zookeeper</module>
         <module>discover-eureka</module>
         <module>discover-core</module>
+        <module>discover-k8s</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

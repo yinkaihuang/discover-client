@@ -6,6 +6,7 @@ import cn.bucheng.discover.util.EnvironmentUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClientAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration;
 import org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration;
 import org.springframework.cloud.zookeeper.ZookeeperAutoConfiguration;
@@ -35,6 +36,7 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
     public static final String REGISTER_TYPE = "register.type";
     public static final String EUREKA = "EUREKA";
     public static final String ZOOKEEPER = "ZOOKEEPER";
+    public static final String K_8_S = "k8s";
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry registry) {
@@ -55,6 +57,9 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
                 log.info("register use zookeeper");
                 registerZookeeper(registry);
                 break;
+            case K_8_S:
+                log.info("register use k8s");
+                registerK8s(registry);
         }
     }
 
@@ -76,5 +81,9 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
         BeanRegisterUtils.registerBeanDefinition(registry, DependencyWatcherAutoConfiguration.class.getName(), DependencyWatcherAutoConfiguration.class);
         //这里如果抽取出来跟踪链是无法正常运行
         BeanRegisterUtils.registerBeanDefinition(registry, RibbonZookeeperAutoConfiguration.class.getName(), RibbonZookeeperAutoConfiguration.class);
+    }
+
+    private void registerK8s(BeanDefinitionRegistry registry) {
+        BeanRegisterUtils.registerBeanDefinition(registry, KubernetesDiscoveryClientAutoConfiguration.class.getName(), KubernetesDiscoveryClientAutoConfiguration.class);
     }
 }

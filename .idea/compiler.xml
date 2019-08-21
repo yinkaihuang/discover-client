@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discover-core" />
         <module name="discover-eureka" />
+        <module name="discover-k8s" />
         <module name="discover-zookeeper" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="discover-core" options="-parameters" />
       <module name="discover-eureka" options="-parameters" />
+      <module name="discover-k8s" options="-parameters" />
       <module name="discover-zookeeper" options="-parameters" />
     </option>
   </component>
