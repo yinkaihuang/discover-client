@@ -1,0 +1,10 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.cloud.zookeeper.discovery.dependency.ZookeeperDependenciesAutoConfiguration
+
+## Environment Post ProcessorsA
+org.springframework.boot.env.EnvironmentPostProcessor=\
+org.springframework.cloud.zookeeper.discovery.dependency.DependencyEnvironmentPostProcessor
+
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+org.springframework.cloud.zookeeper.discovery.configclient.ZookeeperDiscoveryClientConfigServiceBootstrapConfiguration
