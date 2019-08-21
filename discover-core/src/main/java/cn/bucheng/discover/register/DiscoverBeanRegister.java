@@ -36,7 +36,7 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
     public static final String REGISTER_TYPE = "register.type";
     public static final String EUREKA = "EUREKA";
     public static final String ZOOKEEPER = "ZOOKEEPER";
-    public static final String K_8_S = "k8s";
+    public static final String K_8_S = "K8S";
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry registry) {
