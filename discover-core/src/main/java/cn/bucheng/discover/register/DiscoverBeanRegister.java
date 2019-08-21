@@ -56,6 +56,7 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
             case K_8_S:
                 log.info("register use k8s");
                 registerK8s(registry);
+                break;
         }
     }
 
