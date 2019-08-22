@@ -17,8 +17,7 @@
 </dependency>
 
 3.配置使用的注册中心
-register.type=k8s
+register.type=k8s (这里支持k8s/zookeeper/eureka)
 
-4.在启动类上面编辑
-DiscoverClientEnable注解
+4.在启动类上面添加@EableRegisterClient
 ```
