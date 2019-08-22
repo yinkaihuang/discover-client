@@ -1,6 +1,6 @@
 package cn.bucheng.discover.register;
 
-import cn.bucheng.discover.annotation.DiscoverClientEnable;
+import cn.bucheng.discover.annotation.EnableRegisterClient;
 import cn.bucheng.discover.util.BeanRegisterUtils;
 import cn.bucheng.discover.util.EnvironmentUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry registry) {
-        if (!annotationMetadata.hasAnnotation(DiscoverClientEnable.class.getName()))
+        if (!annotationMetadata.hasAnnotation(EnableRegisterClient.class.getName()))
             return;
         String registerType = EnvironmentUtils.getValue(REGISTER_TYPE);
         if (Strings.isBlank(registerType)) {

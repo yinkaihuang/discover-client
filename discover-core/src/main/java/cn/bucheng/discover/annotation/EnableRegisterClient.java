@@ -18,5 +18,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import(DiscoverBeanRegister.class)
-public @interface DiscoverClientEnable {
+public @interface EnableRegisterClient {
 }
