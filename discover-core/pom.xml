@@ -11,7 +11,7 @@
 
     <groupId>cn.bucheng.discover</groupId>
     <artifactId>discover-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

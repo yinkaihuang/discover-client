@@ -10,9 +10,13 @@ import org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClientA
 import org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration;
 import org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration;
 import org.springframework.cloud.zookeeper.ZookeeperAutoConfiguration;
+import org.springframework.cloud.zookeeper.discovery.RibbonZookeeperAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryClientConfiguration;
+import org.springframework.cloud.zookeeper.discovery.dependency.DependencyFeignClientAutoConfiguration;
+import org.springframework.cloud.zookeeper.discovery.dependency.DependencyRestTemplateAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.dependency.DependencyRibbonAutoConfiguration;
+import org.springframework.cloud.zookeeper.discovery.watcher.DependencyWatcherAutoConfiguration;
 import org.springframework.cloud.zookeeper.serviceregistry.ZookeeperAutoServiceRegistrationAutoConfiguration;
 import org.springframework.cloud.zookeeper.serviceregistry.ZookeeperServiceRegistryAutoConfiguration;
 import org.springframework.cloud.zookeeper.support.CuratorServiceDiscoveryAutoConfiguration;
@@ -66,13 +70,18 @@ public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
     }
 
     private void registerZookeeper(BeanDefinitionRegistry registry) {
-        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperDiscoveryAutoConfiguration.class.getName(), ZookeeperDiscoveryAutoConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperDiscoveryClientConfiguration.class.getName(), ZookeeperDiscoveryClientConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, CuratorServiceDiscoveryAutoConfiguration.class.getName(), CuratorServiceDiscoveryAutoConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperServiceRegistryAutoConfiguration.class.getName(), ZookeeperServiceRegistryAutoConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperAutoConfiguration.class.getName(), ZookeeperAutoConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperAutoServiceRegistrationAutoConfiguration.class.getName(), ZookeeperAutoServiceRegistrationAutoConfiguration.class);
-        BeanRegisterUtils.registerBeanDefinition(registry, DependencyRibbonAutoConfiguration.class.getName(), DependencyRibbonAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry, ZookeeperDiscoveryAutoConfiguration.class.getName(),ZookeeperDiscoveryAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,ZookeeperDiscoveryClientConfiguration.class.getName(), ZookeeperDiscoveryClientConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,CuratorServiceDiscoveryAutoConfiguration.class.getName(), CuratorServiceDiscoveryAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,ZookeeperServiceRegistryAutoConfiguration.class.getName(), ZookeeperServiceRegistryAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,ZookeeperAutoConfiguration.class.getName(), ZookeeperAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,ZookeeperAutoServiceRegistrationAutoConfiguration.class.getName(), ZookeeperAutoServiceRegistrationAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,DependencyRibbonAutoConfiguration.class.getName(), DependencyRibbonAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,DependencyFeignClientAutoConfiguration.class.getName(), DependencyFeignClientAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,DependencyRestTemplateAutoConfiguration.class.getName(), DependencyRestTemplateAutoConfiguration.class);
+        BeanRegisterUtils.registerBeanDefinition(registry,DependencyWatcherAutoConfiguration.class.getName(), DependencyWatcherAutoConfiguration.class);
+        //这里如果抽取出来跟踪链是无法正常运行
+        BeanRegisterUtils.registerBeanDefinition(registry, RibbonZookeeperAutoConfiguration.class.getName(),RibbonZookeeperAutoConfiguration.class);
     }
 
     private void registerK8s(BeanDefinitionRegistry registry) {
