@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="discover-core" />
-        <module name="discover-eureka" />
         <module name="discover-k8s" />
+        <module name="discover-core" />
         <module name="discover-zookeeper" />
+        <module name="discover-eureka" />
       </profile>
     </annotationProcessing>
   </component>
