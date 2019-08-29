@@ -23,6 +23,7 @@ import org.springframework.cloud.zookeeper.support.CuratorServiceDiscoveryAutoCo
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
+
 /**
  * @author ：yinchong
  * @create ：2019/8/21 10:46
