@@ -21,3 +21,14 @@ register.type=k8s (这里支持k8s/zookeeper/eureka)
 
 4.在启动类上面添加@EableRegisterClient
 ```
+
+## 问题
+```
+1.上k8s可能出现下面问题
+io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default.svc/api/v1/namespaces/basic-app/endpoints/server-b. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. endpoints "server-b" is forbidden: User "system:serviceaccount:basic-app:default" cannot get endpoints in the namespace "basic-app".
+
+解决办法：
+1. 在Deployment文件中添加 serviceAccountName: application
+2.再执行 kubectl -n basic-app create sa application && kubectl create clusterrolebinding application --clusterrole cluster-admin --serviceaccount=basic-app:application
+
+```
