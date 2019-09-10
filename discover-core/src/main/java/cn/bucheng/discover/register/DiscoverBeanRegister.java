@@ -32,6 +32,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @version:
  */
 @Slf4j
+@SuppressWarnings("all")
 public class DiscoverBeanRegister implements ImportBeanDefinitionRegistrar {
 
     public static final String REGISTER_TYPE = "register.type";

@@ -1,6 +1,6 @@
 package cn.bucheng.discover.annotation;
 
-import cn.bucheng.discover.register.DiscoverBeanRegister;
+import cn.bucheng.discover.register.DiscoverBeanImportSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
@@ -17,6 +17,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(DiscoverBeanRegister.class)
+@Import(DiscoverBeanImportSelector.class)
 public @interface EnableRegisterClient {
 }
