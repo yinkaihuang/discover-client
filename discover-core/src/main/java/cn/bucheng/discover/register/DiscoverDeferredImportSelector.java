@@ -22,6 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClientAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration;
+import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClientConfiguration;
+import org.springframework.cloud.netflix.eureka.config.EurekaClientConfigServerAutoConfiguration;
+import org.springframework.cloud.netflix.eureka.config.EurekaDiscoveryClientConfigServiceAutoConfiguration;
 import org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration;
 import org.springframework.cloud.zookeeper.ZookeeperAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.RibbonZookeeperAutoConfiguration;
@@ -30,10 +33,12 @@ import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryClientCon
 import org.springframework.cloud.zookeeper.discovery.dependency.DependencyFeignClientAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.dependency.DependencyRestTemplateAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.dependency.DependencyRibbonAutoConfiguration;
+import org.springframework.cloud.zookeeper.discovery.dependency.ZookeeperDependenciesAutoConfiguration;
 import org.springframework.cloud.zookeeper.discovery.watcher.DependencyWatcherAutoConfiguration;
 import org.springframework.cloud.zookeeper.serviceregistry.ZookeeperAutoServiceRegistrationAutoConfiguration;
 import org.springframework.cloud.zookeeper.serviceregistry.ZookeeperServiceRegistryAutoConfiguration;
 import org.springframework.cloud.zookeeper.support.CuratorServiceDiscoveryAutoConfiguration;
+import org.springframework.context.annotation.DeferredImportSelector;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -49,7 +54,7 @@ import java.util.List;
  */
 @Slf4j
 @SuppressWarnings("all")
-public class DiscoverBeanImportSelector implements ImportSelector {
+public class DiscoverDeferredImportSelector implements DeferredImportSelector{
     public static final String REGISTER_TYPE = "register.type";
     public static final String EUREKA = "EUREKA";
     public static final String ZOOKEEPER = "ZOOKEEPER";
@@ -62,8 +67,8 @@ public class DiscoverBeanImportSelector implements ImportSelector {
             return null;
         String registerType = EnvironmentUtils.getValue(REGISTER_TYPE);
         if (Strings.isBlank(registerType)) {
-            log.error("not get register.type from environment");
-            throw new RuntimeException("please set register.type");
+            log.warn("not get register.type from environment,use default register.type eureka");
+            registerType = EUREKA;
         }
         registerType = registerType.toUpperCase();
         switch (registerType) {
@@ -87,6 +92,9 @@ public class DiscoverBeanImportSelector implements ImportSelector {
     private void registerEureka(List<String> candidateList) {
         candidateList.add(EurekaClientAutoConfiguration.class.getName());
         candidateList.add(RibbonEurekaAutoConfiguration.class.getName());
+        candidateList.add(EurekaClientConfigServerAutoConfiguration.class.getName());
+        candidateList.add(EurekaDiscoveryClientConfigServiceAutoConfiguration.class.getName());
+        candidateList.add(EurekaDiscoveryClientConfiguration.class.getName());
     }
 
     private void registerZookeeper(List<String> candidateList) {
@@ -101,6 +109,7 @@ public class DiscoverBeanImportSelector implements ImportSelector {
         candidateList.add(DependencyRestTemplateAutoConfiguration.class.getName());
         candidateList.add(DependencyWatcherAutoConfiguration.class.getName());
         candidateList.add(RibbonZookeeperAutoConfiguration.class.getName());
+        candidateList.add(ZookeeperDependenciesAutoConfiguration.class.getName());
     }
 
     private void registerK8s(List<String> candidateList) {
